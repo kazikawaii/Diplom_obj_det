@@ -1,0 +1,38 @@
+services:
+  backend:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    container_name: web-yolo-backend
+    environment:
+      APP_MODELS_DIR: /app/models
+    volumes:
+      - ./models:/app/models:ro
+    ports:
+      - "8000:8000"
+
+  frontend:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+      args:
+        VITE_API_URL: ${VITE_API_URL:-}
+    container_name: web-yolo-frontend
+    depends_on:
+      - backend
+    ports:
+      - "3000:80"
+
+  telegram-bot:
+    build:
+      context: ./telegram_bot
+      dockerfile: Dockerfile
+    container_name: web-yolo-telegram-bot
+    depends_on:
+      - backend
+      - frontend
+    environment:
+      TELEGRAM_BOT_TOKEN: ${TELEGRAM_BOT_TOKEN}
+      WEBAPP_URL: ${WEBAPP_URL}
+      FRONTEND_HEALTH_URL: ${FRONTEND_HEALTH_URL:-http://frontend}
+      BACKEND_HEALTH_URL: ${BACKEND_HEALTH_URL:-http://backend:8000/health}
