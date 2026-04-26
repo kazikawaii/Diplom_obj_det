@@ -24,7 +24,7 @@ frontend/.vite/
 Thumbs.db
 
 # Models (большие .pt файлы)
-models/*.pt
+# models/*.pt
 
 # Скриншоты референса
 begin_page.png
