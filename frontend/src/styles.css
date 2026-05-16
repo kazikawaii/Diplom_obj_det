@@ -257,6 +257,13 @@ img, video { display: block; }
   margin-bottom: 32px;
 }
 
+.hero-actions {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 12px;
+}
+
 .btn-hero {
   display: inline-flex;
   align-items: center;
@@ -273,6 +280,13 @@ img, video { display: block; }
 }
 
 .btn-hero:hover { opacity: 0.85; }
+
+.btn-hero--download {
+  background: rgba(255,255,255,0.08);
+  border: 1px solid var(--dark-border2);
+  color: var(--chalk);
+  text-decoration: none;
+}
 
 /* ═══════════════════════════════════════════════
    FEATURES  (light section)
@@ -1224,7 +1238,7 @@ input[type="range"] {
 .hero-label   { animation: fadeUp 0.65s ease 0.10s both; }
 .hero-heading { animation: fadeUp 0.65s ease 0.22s both; }
 .hero-desc    { animation: fadeUp 0.65s ease 0.34s both; }
-.btn-hero     { animation: fadeUp 0.65s ease 0.46s both; }
+.hero-actions { animation: fadeUp 0.65s ease 0.46s both; }
 
 /* ═══════════════════════════════════════════════
    FEATURE CARDS  — scroll reveal

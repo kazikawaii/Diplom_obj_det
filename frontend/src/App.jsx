@@ -312,9 +312,14 @@ function HeroSection() {
         <p className="hero-desc">
           Загрузите фото или видео — мы найдём и разметим каждый объект.
         </p>
-        <button type="button" className="btn-hero" onClick={scrollToInference}>
-          Начать анализ →
-        </button>
+        <div className="hero-actions">
+          <button type="button" className="btn-hero" onClick={scrollToInference}>
+            Начать анализ →
+          </button>
+          <a className="btn-hero btn-hero--download" href={APK_URL} download={APK_NAME}>
+            Скачать приложение
+          </a>
+        </div>
       </div>
     </section>
   );
