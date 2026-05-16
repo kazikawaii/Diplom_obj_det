@@ -23,6 +23,9 @@ function getApiUrl() {
 const API_URL = getApiUrl();
 const FILE_KIND_IMAGE = "image";
 const FILE_KIND_VIDEO = "video";
+const APK_URL = "/apk/app-debug.apk";
+const APK_NAME = "app-debug.apk";
+const APK_SIZE = "4.9 MB";
 
 function getWsUrl(path) {
     const apiUrl = new URL(API_URL);
@@ -397,6 +400,13 @@ function App() {
                 >
                     Трансляции
                 </button>
+                <button
+                    className={activePage === "android" ? "active" : ""}
+                    type="button"
+                    onClick={() => setActivePage("android")}
+                >
+                    Android
+                </button>
             </nav>
 
             {activePage === "predict" ? (
@@ -672,7 +682,7 @@ function App() {
                     ) : null}
                 </section>
             </main>
-            ) : (
+            ) : activePage === "streams" ? (
             <main className="stream-grid">
                 <section className="panel form-panel">
                     <form onSubmit={handleStartViewer}>
@@ -875,6 +885,64 @@ function App() {
                             ? buildPublisherWsUrl()
                             : "укажите ID"}
                     </div>
+                </section>
+            </main>
+            ) : (
+            <main className="install-page">
+                <section className="install-hero">
+                    <div>
+                        <p className="eyebrow">Android приложение</p>
+                        <h1>Установка мобильного клиента</h1>
+                        <p className="hero-copy">
+                            Скачайте APK-файл на Android-устройство, откройте
+                            его и подтвердите установку из браузера или
+                            файлового менеджера.
+                        </p>
+                    </div>
+
+                    <div className="install-card panel">
+                        <div className="apk-badge" aria-hidden="true">
+                            APK
+                        </div>
+                        <h2>Файл готов</h2>
+                        <p>
+                            {APK_NAME} · {APK_SIZE}
+                        </p>
+                        <a
+                            className="primary-button install-button"
+                            href={APK_URL}
+                            download={APK_NAME}
+                        >
+                            Скачать APK
+                        </a>
+                    </div>
+                </section>
+
+                <section className="install-steps">
+                    <article className="install-step panel">
+                        <span>1</span>
+                        <h3>Откройте страницу на телефоне</h3>
+                        <p>
+                            Перейдите на этот сайт с Android-устройства или
+                            отправьте ссылку себе в мессенджер.
+                        </p>
+                    </article>
+                    <article className="install-step panel">
+                        <span>2</span>
+                        <h3>Скачайте APK</h3>
+                        <p>
+                            Нажмите кнопку скачивания и дождитесь окончания
+                            загрузки файла.
+                        </p>
+                    </article>
+                    <article className="install-step panel">
+                        <span>3</span>
+                        <h3>Разрешите установку</h3>
+                        <p>
+                            Если Android попросит разрешение для источника,
+                            включите его и завершите установку приложения.
+                        </p>
+                    </article>
                 </section>
             </main>
             )}
