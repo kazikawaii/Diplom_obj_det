@@ -208,7 +208,7 @@ function getApiUrl() {
 const API_URL = getApiUrl();
 const FILE_KIND_IMAGE = "image";
 const FILE_KIND_VIDEO  = "video";
-const APK_URL = "/apk/app-debug.apk";
+const APK_URL = `${API_URL}/api/download-apk`;
 const APK_NAME = "app-debug.apk";
 const APK_SIZE = "4.9 MB";
 

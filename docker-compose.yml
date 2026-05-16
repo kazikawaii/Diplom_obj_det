@@ -6,8 +6,10 @@ services:
     container_name: web-yolo-backend
     environment:
       APP_MODELS_DIR: /app/models
+      APP_APK_PATH: /app/apk/app-debug.apk
     volumes:
       - ./models:/app/models:ro
+      - ./apk:/app/apk:ro
     ports:
       - "8000:8000"
 

@@ -3,7 +3,7 @@ import json
 
 from fastapi import FastAPI, File, Form, HTTPException, UploadFile, WebSocket, WebSocketDisconnect
 from fastapi.middleware.cors import CORSMiddleware
-from fastapi.responses import StreamingResponse
+from fastapi.responses import FileResponse, StreamingResponse
 
 from .config import settings
 from .model_manager import model_manager
@@ -78,6 +78,19 @@ def list_models() -> list[ModelInfo]:
     if not models:
         raise HTTPException(status_code=404, detail="No .pt models found")
     return models
+
+
+@app.get("/api/download-apk")
+def download_apk() -> FileResponse:
+    apk_path = settings.apk_path
+    if not apk_path.is_file():
+        raise HTTPException(status_code=404, detail="APK file not found")
+
+    return FileResponse(
+        apk_path,
+        media_type="application/vnd.android.package-archive",
+        filename=apk_path.name,
+    )
 
 
 @app.post("/api/predict", response_model=PredictionResponse)
