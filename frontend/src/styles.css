@@ -1012,6 +1012,146 @@ input[type="range"] {
 }
 
 /* ═══════════════════════════════════════════════
+   ANDROID INSTALL PAGE
+═══════════════════════════════════════════════ */
+.android-page {
+  padding-top: var(--nav-h);
+  background: var(--dark);
+  background-image: radial-gradient(circle, rgba(180,248,64,0.028) 1px, transparent 1px);
+  background-size: 36px 36px;
+  min-height: 100vh;
+  position: relative;
+  overflow: hidden;
+}
+
+.android-hero {
+  max-width: var(--container);
+  margin: 0 auto;
+  padding: 72px 40px 36px;
+}
+
+.android-hero-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1.35fr) minmax(300px, 0.65fr);
+  gap: 22px;
+  align-items: stretch;
+}
+
+.android-heading {
+  max-width: 760px;
+  font-size: clamp(42px, 6vw, 80px);
+  font-weight: 800;
+  letter-spacing: -0.045em;
+  color: var(--chalk);
+  line-height: 1;
+}
+
+.android-desc {
+  max-width: 520px;
+  margin-top: 20px;
+  color: var(--chalk-55);
+  font-size: 15px;
+  line-height: 1.75;
+}
+
+.android-card,
+.android-step {
+  background: var(--dark-2);
+  border: 1px solid var(--dark-border);
+  border-radius: 20px;
+}
+
+.android-card {
+  padding: 28px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 12px;
+}
+
+.apk-mark {
+  width: 70px;
+  height: 70px;
+  display: grid;
+  place-items: center;
+  border: 1px solid var(--neon-border);
+  border-radius: 16px;
+  background: var(--neon-dim);
+  color: var(--neon);
+  font-family: var(--mono);
+  font-size: 20px;
+  font-weight: 800;
+}
+
+.android-card-kicker {
+  margin-top: 8px;
+  font-family: var(--mono);
+  font-size: 11px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--chalk-30);
+}
+
+.android-card h2 {
+  font-size: 26px;
+  letter-spacing: -0.02em;
+  color: var(--chalk);
+}
+
+.android-card p {
+  color: var(--chalk-55);
+  font-size: 13px;
+  line-height: 1.6;
+}
+
+.android-download {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: auto;
+  text-decoration: none;
+}
+
+.android-steps {
+  max-width: var(--container);
+  margin: 0 auto;
+  padding: 0 40px 88px;
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 18px;
+}
+
+.android-step {
+  padding: 24px;
+}
+
+.android-step span {
+  width: 36px;
+  height: 36px;
+  display: grid;
+  place-items: center;
+  margin-bottom: 18px;
+  border-radius: 50%;
+  background: var(--neon-dim);
+  color: var(--neon);
+  font-family: var(--mono);
+  font-weight: 800;
+}
+
+.android-step h3 {
+  margin-bottom: 10px;
+  color: var(--chalk);
+  font-size: 17px;
+  letter-spacing: -0.01em;
+}
+
+.android-step p {
+  color: var(--chalk-55);
+  font-size: 14px;
+  line-height: 1.7;
+}
+
+/* ═══════════════════════════════════════════════
    RESPONSIVE
 ═══════════════════════════════════════════════ */
 @media (max-width: 1100px) {
@@ -1032,6 +1172,11 @@ input[type="range"] {
     grid-template-columns: 1fr;
   }
 
+  .android-hero-grid,
+  .android-steps {
+    grid-template-columns: 1fr;
+  }
+
   .streams-header { padding: 60px 40px 44px; }
 }
 
@@ -1041,11 +1186,16 @@ input[type="range"] {
   .hero-content      { padding: 0 20px 60px; }
   .streams-header    { padding: 52px 20px 36px; }
   .streams-layout    { padding: 0 20px 60px; }
+  .android-hero      { padding: 52px 20px 28px; }
+  .android-steps     { padding: 0 20px 60px; }
   .features-grid     { grid-template-columns: 1fr; }
   .preview-grid      { grid-template-columns: 1fr; }
-  .navbar-center     { display: none; }
+  .navbar-logo       { font-size: 0; }
+  .navbar-center     { gap: 0; }
+  .nav-link          { padding: 8px 10px; font-size: 13px; }
   .nav-cta           { display: none; }
   .hero-heading      { font-size: clamp(44px, 10vw, 64px); }
+  .android-heading   { font-size: 40px; }
 }
 
 /* ═══════════════════════════════════════════════
@@ -1133,7 +1283,8 @@ input[type="range"] {
 
 /* keep section children above the glow */
 .inference-section > *,
-.streams-page     > * { position: relative; z-index: 1; }
+.streams-page     > *,
+.android-page     > * { position: relative; z-index: 1; }
 
 /* ═══════════════════════════════════════════════
    MICRO-INTERACTIONS

@@ -208,6 +208,9 @@ function getApiUrl() {
 const API_URL = getApiUrl();
 const FILE_KIND_IMAGE = "image";
 const FILE_KIND_VIDEO  = "video";
+const APK_URL = "/apk/app-debug.apk";
+const APK_NAME = "app-debug.apk";
+const APK_SIZE = "4.9 MB";
 
 function getWsUrl(path) {
   const u = new URL(API_URL);
@@ -247,7 +250,7 @@ function Navbar({ activePage, setActivePage }) {
     window.scrollTo({ top: 0, behavior: "smooth" });
   }
 
-  const solid = scrolled || activePage === "streams";
+  const solid = scrolled || activePage === "streams" || activePage === "android";
 
   return (
     <nav className={`navbar${solid ? " navbar--solid" : ""}`}>
@@ -267,6 +270,13 @@ function Navbar({ activePage, setActivePage }) {
             onClick={() => setActivePage("streams")}
           >
             Трансляции
+          </button>
+          <button
+            type="button"
+            className={`nav-link${activePage === "android" ? " nav-link--active" : ""}`}
+            onClick={() => setActivePage("android")}
+          >
+            Android
           </button>
         </div>
 
@@ -811,6 +821,59 @@ function StreamsPage({
   );
 }
 
+// ─── Android Install Page ────────────────────────────────────────────────────
+
+function AndroidInstallPage() {
+  return (
+    <main className="android-page">
+      <div className="scene-glow" aria-hidden="true" />
+      <section className="android-hero">
+        <div className="section-tag section-tag--light">
+          <span className="tag-dot tag-dot--neon" />
+          ANDROID
+        </div>
+        <div className="android-hero-grid">
+          <div>
+            <h1 className="android-heading">Установка мобильного клиента</h1>
+            <p className="android-desc">
+              Скачайте APK-файл на Android-устройство, откройте его и
+              подтвердите установку из браузера или файлового менеджера.
+            </p>
+          </div>
+
+          <div className="android-card">
+            <div className="apk-mark" aria-hidden="true">APK</div>
+            <span className="android-card-kicker">Файл готов</span>
+            <h2>{APK_NAME}</h2>
+            <p>{APK_SIZE} · Android package archive</p>
+            <a className="btn-run android-download" href={APK_URL} download={APK_NAME}>
+              Скачать APK
+            </a>
+          </div>
+        </div>
+      </section>
+
+      <section className="android-steps">
+        <article className="android-step">
+          <span>1</span>
+          <h3>Откройте страницу на телефоне</h3>
+          <p>Перейдите на этот сайт с Android-устройства или отправьте ссылку себе.</p>
+        </article>
+        <article className="android-step">
+          <span>2</span>
+          <h3>Скачайте APK</h3>
+          <p>Нажмите кнопку скачивания и дождитесь окончания загрузки файла.</p>
+        </article>
+        <article className="android-step">
+          <span>3</span>
+          <h3>Разрешите установку</h3>
+          <p>Если Android попросит разрешение для источника, включите его и завершите установку.</p>
+        </article>
+      </section>
+    </main>
+  );
+}
+
 // ─── App (state + logic) ──────────────────────────────────────────────────────
 
 function App() {
@@ -1054,7 +1117,7 @@ function App() {
             resultKind={resultKind}
           />
         </>
-      ) : (
+      ) : activePage === "streams" ? (
         <StreamsPage
           {...sharedProps}
           streamSettings={streamSettings}
@@ -1076,6 +1139,8 @@ function App() {
           buildViewerWsUrl={buildViewerWsUrl}
           buildPublisherWsUrl={buildPublisherWsUrl}
         />
+      ) : (
+        <AndroidInstallPage />
       )}
     </>
   );
